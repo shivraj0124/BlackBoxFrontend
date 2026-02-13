@@ -95,79 +95,99 @@ export default function HomePage() {
           <div className="w-full grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
 
             {/* Left Side - Info Section */}
-            <div className="space-y-6">
-              <div className="space-y-4">
-                <div className="inline-block">
-                  <span className="px-4 py-2 bg-green-500/10 text-green-400 rounded-full text-sm font-semibold border border-green-500/30">
-                    Debugathon 2026
-                  </span>
-                </div>
+            <div className="space-y-6 py-5">
+  <div className="space-y-4">
+    <div className="inline-block">
+      <span className="px-4 py-2 bg-green-500/10 text-green-400 rounded-full text-sm font-semibold border border-green-500/30">
+        Debug-A-Thon 2026
+      </span>
+    </div>
 
-                <h1 className="text-5xl lg:text-6xl font-bold bg-gradient-to-r from-green-400 via-emerald-500 to-green-600 bg-clip-text text-transparent">
-                  BlackBOX
-                </h1>
+    <h1 className="text-5xl lg:text-6xl font-bold bg-gradient-to-r from-green-400 via-emerald-500 to-green-600 bg-clip-text text-transparent">
+      BlackBOX
+    </h1>
 
-                <p className="text-gray-400 text-lg leading-relaxed">
-                  Step into the unknown. Debug, optimize, and conquer challenges hidden within the black box.
-                  Upload your solutions and let the system evaluate your problem-solving prowess.
-                </p>
-              </div>
+    <p className="text-gray-400 text-lg leading-relaxed">
+      Step into the unknown. Debug, optimize, and conquer challenges hidden within the black box.
+      Upload your solutions and let the system evaluate your problem-solving prowess.
+    </p>
+  </div>
 
-              {/* Features */}
-              <div className="space-y-4 pt-4">
-                <div className="flex items-start gap-3">
-                  <div className="mt-1 bg-green-500/20 rounded-lg p-2">
-                    <svg className="w-5 h-5 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                  </div>
-                  <div>
-                    <h3 className="text-white font-semibold mb-1">Real-time Evaluation</h3>
-                    <p className="text-gray-500 text-sm">Get instant feedback on your submissions</p>
-                  </div>
-                </div>
+  {/* Features */}
+ 
 
-                <div className="flex items-start gap-3">
-                  <div className="mt-1 bg-green-500/20 rounded-lg p-2">
-                    <svg className="w-5 h-5 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-                    </svg>
-                  </div>
-                  <div>
-                    <h3 className="text-white font-semibold mb-1">Competitive Leaderboard</h3>
-                    <p className="text-gray-500 text-sm">Climb the ranks and prove your skills</p>
-                  </div>
-                </div>
+ 
 
-                <div className="flex items-start gap-3">
-                  <div className="mt-1 bg-green-500/20 rounded-lg p-2">
-                    <svg className="w-5 h-5 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
-                    </svg>
-                  </div>
-                  <div>
-                    <h3 className="text-white font-semibold mb-1">Frontend & Backend</h3>
-                    <p className="text-gray-500 text-sm">Test your full-stack debugging abilities</p>
-                  </div>
-                </div>
-              </div>
+ {/* How to Run Section */}
+<div className="pt-8 border-t border-green-500/20 space-y-5">
+  <h2 className="text-2xl font-bold text-green-400">
+    How to Run the Project
+  </h2>
 
-              {/* Stats */}
-              <div className="grid grid-cols-3 gap-4 pt-6 border-t border-green-500/20">
-                <div className="text-center">
-                  <div className="text-2xl font-bold text-green-400">10+</div>
-                  <div className="text-xs text-gray-500 mt-1">Challenges</div>
-                </div>
-                <div className="text-center border-x border-green-500/20">
-                  <div className="text-2xl font-bold text-green-400">120+</div>
-                  <div className="text-xs text-gray-500 mt-1">Participants</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-2xl font-bold text-green-400">Live</div>
-                  <div className="text-xs text-gray-500 mt-1">Competition</div>
-                </div>
-              </div>
-            </div>
+  <p className="text-red-400 font-semibold">
+    ⚠ Always run the Backend before starting the Frontend.
+  </p>
+
+  {/* Node Installation */}
+  <div className="space-y-2">
+    <h3 className="text-white font-semibold">0. Install Node.js</h3>
+
+    <p className="text-gray-500 text-sm">
+      Make sure Node.js is installed on your system.
+      Download it from the official website:
+    </p>
+
+    <div className="bg-black/60 rounded-lg p-3 text-green-400 text-sm font-mono">
+      https://nodejs.org
+    </div>
+
+    <p className="text-gray-500 text-sm">
+      After installation, verify using:
+    </p>
+
+    <div className="bg-black/60 rounded-lg p-3 text-green-400 text-sm font-mono">
+      node -v <br />
+      npm -v
+    </div>
+  </div>
+
+  {/* Backend */}
+  <div className="space-y-2 overflow-hidden">
+    <h3 className="text-white font-semibold">1. Run Backend</h3>
+
+    <p className="text-gray-500 text-sm">
+      Start the backend server using Node.js:
+    </p>
+
+    <div className="bg-black/60 rounded-lg p-3 text-green-400 text-sm font-mono">
+      node index.js
+    </div>
+  </div>
+
+  {/* Frontend */}
+  <div className="space-y-2">
+    <h3 className="text-white font-semibold">2. Build & Run Frontend</h3>
+
+    <p className="text-gray-500 text-sm">
+      First, install Serve and build the frontend:
+    </p>
+
+    <div className="bg-black/60 rounded-lg p-3 text-green-400 text-sm font-mono space-y-1">
+      <div>npm install -g serve</div>
+      <div>npm run build</div>
+    </div>
+
+    <p className="text-gray-500 text-sm mt-2">
+      Then run the production build:
+    </p>
+
+    <div className="bg-black/60 rounded-lg p-3 text-green-400 text-sm font-mono">
+      serve -s dist
+    </div>
+  </div>
+</div>
+          </div>
+
 
             {/* Right Side - Upload Form */}
             <div className="w-full">
