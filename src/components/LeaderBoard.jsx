@@ -60,13 +60,16 @@ const Leaderboard = () => {
 
   // Rank users based on total
   const rankedData = useMemo(() => {
-    return [...data]
-      .sort((a, b) => b.total - a.total)
-      .map((item, index) => ({
-        ...item,
-        rank: index + 1,
-      }));
-  }, [data]);
+  if (!Array.isArray(data)) return [];
+
+  return [...data]
+    .sort((a, b) => (b?.total || 0) - (a?.total || 0))
+    .map((item, index) => ({
+      ...item,
+      rank: index + 1,
+    }));
+}, [data]);
+
 
   // Find current user's rank
   const currentUserRank = useMemo(() => {
@@ -126,7 +129,7 @@ const Leaderboard = () => {
     <div className="min-h-screen bg-gradient-to-br from-gray-900 via-black to-gray-900 text-white ">
       {/* Header */}<Navbar />
       <div className="max-w-7xl mx-auto mb-8 mt-5">
-        <div className="text-center mb-6">
+        <div className="text-center mb-6 pt-10">
           <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-green-400 via-emerald-500 to-green-600 bg-clip-text text-transparent mb-2">
             Leaderboard
           </h1>
