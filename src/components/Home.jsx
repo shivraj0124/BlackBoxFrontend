@@ -130,7 +130,7 @@ export default function HomePage() {
 
   {/* Node Installation */}
   <div className="space-y-2">
-    <h3 className="text-white font-semibold">0. Install Node.js</h3>
+    <h3 className="text-white font-semibold">1. Install Node.js</h3>
 
     <p className="text-gray-500 text-sm">
       Make sure Node.js is installed on your system.
@@ -153,7 +153,7 @@ export default function HomePage() {
 
   {/* Backend */}
   <div className="space-y-2 overflow-hidden">
-    <h3 className="text-white font-semibold">1. Run Backend</h3>
+    <h3 className="text-white font-semibold">2. Run Backend</h3>
 
     <p className="text-gray-500 text-sm">
       Start the backend server using Node.js:
@@ -166,7 +166,7 @@ export default function HomePage() {
 
   {/* Frontend */}
   <div className="space-y-2">
-    <h3 className="text-white font-semibold">2. Build & Run Frontend</h3>
+    <h3 className="text-white font-semibold">3. Build & Run Frontend</h3>
 
     <p className="text-gray-500 text-sm">
       First, install Serve and build the frontend:
