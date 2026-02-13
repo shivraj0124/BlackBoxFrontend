@@ -288,7 +288,7 @@ export default function HomePage() {
                     <p className="text-sm text-gray-400 mb-3">Quick Access</p>
                     <div className="grid grid-cols-2 gap-3">
                       <Link
-                        to="https://drive.google.com/drive/folders/1vd6pGPdeFi2WXCIRzqQUfjQg8UoVj9EN?usp=sharing"
+                        to="https://drive.google.com/drive/folders/1Nh55sRIQ_gzTcByXlPp2PtcqFWh-o8gS?usp=sharing"
                            className="p-3 bg-gray-800/50 border border-green-500/20 rounded-lg text-white 
                                  hover:bg-green-500/10 hover:border-green-500/40 transition-all group"
                       >
