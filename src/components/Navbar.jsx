@@ -126,6 +126,12 @@ function Navbar() {
                         >
                             Leaderboard
                         </button>
+                        <button
+                            onClick={() => handleNavigation('/file-explorer')}
+                            className="w-full text-left px-4 py-3 rounded-lg bg-green-900 border border-green-500/30 text-green-100 hover:text-green-300 transition-colors"
+                        >
+                            Files
+                        </button>
 
                         {/* Auth Buttons */}
                         {user == null ? (

@@ -4,6 +4,7 @@ import { toast } from "react-hot-toast";
 import Navbar from "./Navbar";
 import { useAuth } from "../../context/authContext";
 const FIVE_MINUTES = 5 * 60 * 1000;
+import { useNavigate,Link } from "react-router-dom";
 
 export default function HomePage() {
   const { user } = useAuth();
@@ -12,7 +13,7 @@ export default function HomePage() {
   const [uploadType, setUploadType] = useState("frontend");
   const [remainingTime, setRemainingTime] = useState(0);
   const [loading, setLoading] = useState(false);
-
+ const navigate = useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -266,10 +267,9 @@ export default function HomePage() {
                   <div className="pt-4 border-t border-green-500/20">
                     <p className="text-sm text-gray-400 mb-3">Quick Access</p>
                     <div className="grid grid-cols-2 gap-3">
-                      <button
-                        type="button"
-                        onClick={() => navigateToCode("frontend")}
-                        className="p-3 bg-gray-800/50 border border-green-500/20 rounded-lg text-white 
+                      <Link
+                        to="https://drive.google.com/drive/folders/1vd6pGPdeFi2WXCIRzqQUfjQg8UoVj9EN?usp=sharing"
+                           className="p-3 bg-gray-800/50 border border-green-500/20 rounded-lg text-white 
                                  hover:bg-green-500/10 hover:border-green-500/40 transition-all group"
                       >
                         <div className="flex items-center justify-center gap-2 cursor-pointer">
@@ -278,12 +278,11 @@ export default function HomePage() {
                           </svg>
                           <span className="font-semibold">Frontend</span>
                         </div>
-                      </button>
+                      </Link>
 
-                      <button
-                        type="button"
-                        onClick={() => navigateToCode("backend")}
-                        className="p-3 bg-gray-800/50 border border-green-500/20 rounded-lg text-white 
+                      <Link
+                        to="https://drive.google.com/drive/folders/19HtF-pSL8JjN2eAS67lWF3JH-zkgFNnp?usp=sharing"
+                           className="p-3 bg-gray-800/50 border border-green-500/20 rounded-lg text-white 
                                  hover:bg-green-500/10 hover:border-green-500/40 transition-all group"
                       >
                         <div className="flex items-center justify-center gap-2 cursor-pointer">
@@ -292,7 +291,7 @@ export default function HomePage() {
                           </svg>
                           <span className="font-semibold">Backend</span>
                         </div>
-                      </button>
+                      </Link>
                     </div>
                   </div>
                 </form>
