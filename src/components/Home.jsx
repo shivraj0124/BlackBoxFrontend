@@ -80,7 +80,7 @@ export default function HomePage() {
 
     } catch (error) {
       // console.error("Upload error:", error);
-      toast.error("Something went wrong!");
+      toast.error("Rate Limited! Please wait before uploading again.");
     } finally {
       setLoading(false);
     }
