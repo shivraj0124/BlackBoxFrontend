@@ -1,0 +1,292 @@
+import { useState } from "react";
+import { ChevronRight, ChevronDown, Folder, File, AlertTriangle, FolderOpen, Copy, Check } from "lucide-react";
+import Navbar from "./Navbar";
+
+const FileExplorer = ({ data, onFileClick }) => {
+  return (
+    <div className="bg-gradient-to-br from-gray-900 via-black to-gray-900 min-h-screen">
+      <Navbar />
+      <div className="pt-8 pb-12 px-4">
+        <div className="max-w-4xl mx-auto">
+          {/* Main Container */}
+          <div className="bg-slate-900/80 border border-emerald-500/10 rounded-3xl shadow-2xl overflow-hidden backdrop-blur-xl">
+            
+            {/* Header */}
+            <div className="relative overflow-hidden">
+              <div className="absolute inset-0 bg-gradient-to-r from-emerald-500/5 via-green-500/5 to-teal-500/5" />
+              <div className="relative px-8 py-6 border-b border-emerald-500/10">
+                <div className="flex items-center gap-4">
+                  <div className="p-3 bg-gradient-to-br from-emerald-500/20 to-green-500/20 rounded-2xl ring-1 ring-emerald-500/30 shadow-lg shadow-emerald-500/10">
+                    <Folder className="w-6 h-6 text-emerald-400" />
+                  </div>
+                  <div>
+                    <h2 className="text-2xl font-bold text-white tracking-tight">
+                      File Explorer
+                    </h2>
+                    <p className="text-slate-400 text-sm mt-0.5">Browse and select your files</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* File Tree */}
+            <div className="p-6">
+              {data?.length > 0 ? (
+                <div className="space-y-1">
+                  {data.map((item, index) => (
+                    <FileItem
+                      key={index}
+                      item={item}
+                      onFileClick={onFileClick}
+                      level={0}
+                      parentPath=""
+                    />
+                  ))}
+                </div>
+              ) : (
+                <div className="text-center py-16">
+                  <div className="inline-flex items-center justify-center w-20 h-20 rounded-2xl bg-slate-800/50 border border-slate-700/50 mb-4">
+                    <Folder className="w-10 h-10 text-slate-600" />
+                  </div>
+                  <p className="text-slate-500 font-medium">No files to display</p>
+                  <p className="text-slate-600 text-sm mt-1">Upload or add files to get started</p>
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const FileItem = ({ item, onFileClick, level, parentPath }) => {
+  const [open, setOpen] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
+  const [copied, setCopied] = useState(false);
+
+  const currentPath = parentPath ? `${parentPath}/${item.name}` : item.name;
+
+  const handleCopy = async (e) => {
+    e.stopPropagation();
+    await navigator.clipboard.writeText(currentPath);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
+  // ================= FOLDER =================
+  if (item.type === "folder") {
+    return (
+      <div className="my-0.5">
+        <div
+          className={`
+            group flex items-center gap-3 px-3 py-2.5 rounded-xl cursor-pointer
+            transition-all duration-200 ease-out
+            ${isHovered 
+              ? 'bg-emerald-500/8 ring-1 ring-emerald-500/20 shadow-sm' 
+              : 'hover:bg-slate-800/50'
+            }
+          `}
+          style={{ marginLeft: `${level * 20}px` }}
+          onClick={() => setOpen(!open)}
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
+        >
+          <div className="flex items-center gap-2.5 flex-1 min-w-0">
+            {open ? (
+              <ChevronDown className="w-4 h-4 text-emerald-400 flex-shrink-0 transition-transform" />
+            ) : (
+              <ChevronRight className="w-4 h-4 text-slate-500 flex-shrink-0 transition-transform group-hover:text-slate-400" />
+            )}
+
+            {open ? (
+              <FolderOpen className="w-5 h-5 text-emerald-400 flex-shrink-0" />
+            ) : (
+              <Folder className="w-5 h-5 text-slate-500 flex-shrink-0 group-hover:text-slate-400" />
+            )}
+
+            <span className={`
+              font-medium text-sm truncate transition-colors
+              ${open ? 'text-emerald-400' : 'text-slate-300 group-hover:text-white'}
+            `}>
+              {item.name}
+            </span>
+          </div>
+
+          {item.children && (
+            <span className="text-xs text-slate-500 font-medium px-2 py-0.5 rounded-md bg-slate-800/50">
+              {item.children.length}
+            </span>
+          )}
+        </div>
+
+        {item.children && open && (
+          <div className="relative mt-1 ml-3">
+            <div className="absolute left-2 top-0 bottom-0 w-px bg-gradient-to-b from-emerald-500/20 via-emerald-500/10 to-transparent" />
+            <div className="space-y-0.5">
+              {item.children.map((child, index) => (
+                <FileItem
+                  key={index}
+                  item={child}
+                  onFileClick={onFileClick}
+                  level={level + 1}
+                  parentPath={currentPath}
+                />
+              ))}
+            </div>
+          </div>
+        )}
+      </div>
+    );
+  }
+
+  // ================= FILE =================
+  return (
+    <div
+      className={`
+        group flex items-center gap-3 px-3 py-2 rounded-xl cursor-pointer
+        transition-all duration-200 ease-out
+        ${isHovered 
+          ? 'bg-emerald-500/5 ring-1 ring-emerald-500/10 translate-x-0.5' 
+          : 'hover:bg-slate-800/30'
+        }
+      `}
+      style={{ marginLeft: `${level * 20 + 24}px` }}
+      onClick={() => onFileClick(item.name)}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
+      <File className={`
+        w-4 h-4 flex-shrink-0 transition-colors
+        ${isHovered ? 'text-emerald-400' : 'text-slate-500'}
+      `} />
+
+      <span className={`
+        text-sm flex-1 min-w-0 truncate transition-colors
+        ${isHovered ? 'text-emerald-400' : 'text-slate-400'}
+      `}>
+        {item.name}
+      </span>
+
+      {/* COPY BUTTON */}
+      <button
+        onClick={handleCopy}
+        className={`
+          p-1.5 rounded-lg transition-all duration-200
+          ${copied 
+            ? 'bg-emerald-500/20 text-emerald-400' 
+            : 'hover:bg-slate-800 text-slate-500 hover:text-emerald-400 opacity-0 group-hover:opacity-100'
+          }
+        `}
+        title={copied ? "Copied!" : "Copy path"}
+      >
+        {copied ? (
+          <Check className="w-3.5 h-3.5" />
+        ) : (
+          <Copy className="w-3.5 h-3.5" />
+        )}
+      </button>
+    </div>
+  );
+};
+
+const Modal = ({ fileName, onClose }) => {
+  const [isClosing, setIsClosing] = useState(false);
+
+  const handleClose = () => {
+    setIsClosing(true);
+    setTimeout(onClose, 250);
+  };
+
+  return (
+    <div
+      className={`
+        fixed inset-0 bg-black/60 backdrop-blur-xl
+        flex justify-center items-center z-50 p-4
+        transition-all duration-250 ease-out
+        ${isClosing ? 'opacity-0' : 'opacity-100'}
+      `}
+      onClick={handleClose}
+    >
+      <div
+        className={`
+          bg-gradient-to-b from-slate-900 to-slate-950
+          border border-amber-500/20 rounded-3xl shadow-2xl 
+          w-full max-w-md
+          transform transition-all duration-300 ease-out
+          ${isClosing ? 'scale-95 opacity-0 translate-y-4' : 'scale-100 opacity-100 translate-y-0'}
+        `}
+        onClick={(e) => e.stopPropagation()}
+      >
+        <div className="p-8">
+          {/* Warning Icon */}
+          <div className="relative mb-6">
+            <div className="absolute inset-0 bg-amber-500/20 rounded-full blur-xl" />
+            <div className="relative flex items-center justify-center w-20 h-20 mx-auto bg-gradient-to-br from-amber-500/20 to-orange-500/20 rounded-full ring-2 ring-amber-500/30 shadow-lg">
+              <AlertTriangle className="w-10 h-10 text-amber-400" />
+            </div>
+          </div>
+          
+          {/* Title */}
+          <h3 className="text-3xl font-bold text-center mb-2">
+            <span className="bg-gradient-to-r from-amber-400 via-amber-300 to-orange-400 bg-clip-text text-transparent">
+              Warning
+            </span>
+          </h3>
+          
+          {/* Description */}
+          <p className="text-center text-slate-400 mb-6 text-sm">
+            A penalty will be applied when opening this file
+          </p>
+          
+          {/* File Name Display */}
+          <div className="bg-slate-900/80 border border-emerald-500/20 rounded-2xl px-5 py-4 mb-8 backdrop-blur-sm ring-1 ring-slate-800/50 shadow-inner">
+            <div className="flex items-center gap-2 justify-center">
+              <File className="w-4 h-4 text-emerald-400 flex-shrink-0" />
+              <p className="text-center font-semibold text-emerald-400 break-all text-sm">
+                {fileName}
+              </p>
+            </div>
+          </div>
+          
+          {/* Action Buttons */}
+          <div className="flex gap-3">
+            <button
+              onClick={handleClose}
+              className="
+                flex-1 py-3.5 px-6 rounded-xl font-semibold text-sm
+                bg-slate-800/80 border border-slate-700/50
+                text-slate-300
+                hover:bg-slate-800 hover:border-slate-600
+                active:scale-[0.98]
+                transition-all duration-200
+                focus:outline-none focus:ring-2 focus:ring-slate-600/50 focus:ring-offset-2 focus:ring-offset-slate-950
+                shadow-sm
+              "
+            >
+              Cancel
+            </button>
+            
+            <button
+              onClick={handleClose}
+              className="
+                flex-1 py-3.5 px-6 rounded-xl font-semibold text-sm
+                bg-gradient-to-r from-emerald-500 to-green-600
+                text-white shadow-lg shadow-emerald-500/25
+                hover:shadow-emerald-500/40 hover:from-emerald-400 hover:to-green-500
+                active:scale-[0.98]
+                transition-all duration-200
+                focus:outline-none focus:ring-2 focus:ring-emerald-500/50 focus:ring-offset-2 focus:ring-offset-slate-950
+              "
+            >
+              Proceed
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export { FileExplorer, Modal };
+export default FileExplorer;
