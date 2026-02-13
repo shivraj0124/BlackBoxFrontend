@@ -73,9 +73,9 @@ export default function HomePage() {
       );
 
       if (uploadRes.status === 200) {
-        toast.success("Build successful! Check Leaderboard.");
+        toast.success("Build successful! Check Leaderboard After few minutes!");
       } else {
-        toast.error("Upload/Build failed!");
+        // toast.error("Upload/Build failed!");
       }
 
     } catch (error) {
