@@ -5,12 +5,14 @@ import axios from "axios";
 import toast from "react-hot-toast";
 const FileExplorer = ({ data, filesData, onFileClick, onFileClick2 }) => {
   return (
-    <div className=" bg-gradient-to-br from-gray-900 via-black to-gray-900 min-h-screen">
+    <>
       <Navbar />
-      <div className="mt-5 max-w-5xl mx-auto bg-gray-900/50 border border-green-500/20 rounded-2xl shadow-2xl overflow-hidden backdrop-blur-sm">
+    <div className="mt-10 pt-20 bg-gradient-to-br from-gray-900 via-black to-gray-900 min-h-screen">
+
+      <div className=" max-w-5xl mx-auto bg-gray-900/50 border border-green-500/20 rounded-2xl shadow-2xl overflow-hidden backdrop-blur-sm">
 
         {/* Header */}
-        <div className="bg-gradient-to-r from-green-500/20 to-emerald-600/20 border-b border-green-500/20 px-6 py-5">
+        <div className=" bg-gradient-to-r from-green-500/20 to-emerald-600/20 border-b border-green-500/20 px-6 py-5">
           <h2 className="text-2xl font-bold text-green-400 flex items-center gap-3">
             <div className="p-2 bg-green-500/20 rounded-lg">
               <Folder className="w-6 h-6 text-green-400" />
@@ -43,6 +45,7 @@ const FileExplorer = ({ data, filesData, onFileClick, onFileClick2 }) => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 

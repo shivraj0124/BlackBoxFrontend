@@ -23,8 +23,8 @@ function Navbar() {
     };
 
     return (
-        <nav className="border-b border-green-500/20 bg-black/40 backdrop-blur-sm fixed w-full top-0 z-50">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6">
+        <nav className="border-b border-green-500/20 bg-black backdrop-blur-sm fixed w-full top-0 z-50">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 ">
                 <div className="flex justify-between items-center py-4">
                     {/* Logo */}
                     <div
@@ -44,6 +44,12 @@ function Navbar() {
                             className="px-6 border rounded-md bg-green-900 border-green-500/30 py-2 cursor-pointer text-green-100 hover:text-green-300 transition-colors"
                         >
                             Leaderboard
+                        </button>
+                        <button
+                            onClick={() => navigate('/file-explorer')}
+                            className="px-6 border rounded-md bg-green-900 border-green-500/30 py-2 cursor-pointer text-green-100 hover:text-green-300 transition-colors"
+                        >
+                            Files
                         </button>
 
                         {user == null ? (
